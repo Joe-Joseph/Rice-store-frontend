@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Form = ({ data, handleChanges, handleSubmit}) => {
+const Form = ({ handleChanges, handleSubmit}) => {
     return (
         <form className="form" onSubmit={handleSubmit}>
             <div className="form__content">
@@ -25,7 +25,8 @@ const Form = ({ data, handleChanges, handleSubmit}) => {
 };
 
 Form.propTypes = {
-    
-};
+    handleChanges: PropTypes.func,
+    handleSubmit: PropTypes.func
+}
 
 export default Form;

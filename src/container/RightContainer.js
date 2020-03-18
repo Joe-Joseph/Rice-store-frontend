@@ -15,7 +15,9 @@ const RightContainer = ({data, handleChanges, handleSubmit}) => {
 };
 
 RightContainer.propTypes = {
-    
+    data: PropTypes.object,
+    handleChanges: PropTypes.func,
+    handleSubmit: PropTypes.func
 };
 
 export default RightContainer;

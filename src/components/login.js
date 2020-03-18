@@ -7,9 +7,9 @@ import RightContainer from '../container/RightContainer';
 const Login = () => {
     const [ attributes, setAttributes ] = useState({});
 
+    // eslint-disable-next-line no-unused-vars
     const [signIn, {data, error}] = useMutation(USER_LOGIN);
     const handleChanges = (e) => {
-        console.log('called', attributes.email);
         setAttributes({
             ...attributes,
             [e.target.name]: e.target.value
@@ -25,8 +25,6 @@ const Login = () => {
             },
         });
     }
-
-    // console.log('Here!!!!!!!!>>>>>>>>', error);
 
     return (
         <div className="container">

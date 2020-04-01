@@ -1,0 +1,31 @@
+.report-data td{
+    padding-top: 30px;
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+}
+
+.table-head thead th {
+    border: none;
+}
+
+.report-data td:not(:first-child){
+    padding-left: 60px;
+}
+
+.report-data td:first-child{
+    padding-left: 20px;
+    color: #2779D9;
+}
+
+.bold-font{
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+.report-title {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    padding-top: 20px;
+    font-family: 'Lato', sans-serif;
+}

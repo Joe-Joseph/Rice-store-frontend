@@ -1,0 +1,55 @@
+.modal-form-input{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #F6F6F6;
+    margin-left: 10%;
+    outline: none;
+    border: none;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.modal-form-input:not(:last-child){
+    margin-bottom: 20px;
+}
+.modal-button {
+    left: 36%;
+    padding: 0.6rem 5rem;
+    border-radius: 0.5rem;
+    background-color: #15938F;
+    color: #fff;
+    position: absolute;
+    top: 85%;
+}
+
+.modal-button:focus {
+    outline: none;
+}
+
+.modal-form {
+    width: 82%;
+    margin-top: -50px;
+}
+
+.sell-form-title {
+    position: absolute;
+    left: 35%;
+    top: 28px;
+    font-size: 1.6rem;
+}
+
+.close-modal {
+    font-size: 30px;
+    color: #808284;
+    display: inline-block;
+    position: absolute;
+    right: 50px;
+    cursor: pointer;
+}
+
+.my-modal-header {
+    margin-top: 15px;
+    margin-bottom: 20px;
+}

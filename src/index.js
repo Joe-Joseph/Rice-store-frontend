@@ -1,26 +1,24 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import ApolloClient from 'apollo-boost';
+import 'babel-polyfill';
 import { ApolloProvider } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks';
-// import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './styles/main.scss';
-// import client from './util/ApolloClient';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from '../src/components/App';
+import client from './graphql/ApolloClient';
 
-
-const client = new ApolloClient({
-    uri: 'https://rice-store.herokuapp.com/'
-})
 
 const renderToDOM = () => {
   if (document.getElementById('app') !== null) {
     ReactDom.render(
       <ApolloProvider client={client}>
         <ApolloHooksProvider client={client}>
-          {/* <Router> */}
+          <Router>
             <App />
-          {/* </Router> */}
+          </Router>
         </ApolloHooksProvider>
       </ApolloProvider>,
       document.getElementById('app'),

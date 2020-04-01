@@ -1,0 +1,63 @@
+.side-bar {
+    background-color: #01615d;
+    display: block;
+    height: 100vh;
+    width: 15%;
+    display: inline-block;
+
+    &__link-list ul{
+        left: 7rem;
+        top: 90px;
+        position: absolute;
+    }
+
+    &__link-list ul li{
+        display: inline;
+        color: #fff;
+        font-size: 14px;
+        font-family: 'Lato', sans-serif;
+    }
+
+    &__text-decoration {
+        text-decoration: none;
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    &__app-title {
+        padding-top: 14px;
+        padding-left: 45px;
+        display: inline-block;
+        font-family: 'Kelly Slab', cursive;
+        color: #fff;
+        font-size: 1.2rem;
+    }
+}
+.history-content{
+    margin-left: 19%;
+    margin-top: -58%;
+    max-height: 97vh;
+    overflow: scroll;
+}
+.transa-card {
+    display: inline-block;
+    margin-left: 55px;
+    margin-top: 40px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+    padding-top: 0;
+    padding-left: 45px;
+    padding-right: 55px;
+    padding-bottom: 30px;
+    width: 300px
+}
+
+.history-report-data td{
+    padding-top: 20px;
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+}
+
+.history-report-data td:not(:first-child){
+    padding-left: 30px;
+}

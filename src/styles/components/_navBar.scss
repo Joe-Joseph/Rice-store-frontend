@@ -1,0 +1,42 @@
+.nav-bar {
+    background-color: #01615d;
+    display: flex;
+    height: 60px;
+    &__home-title{
+        margin: 0;
+        padding: 0;
+    }
+
+    &__home-title h1{
+        padding-top: 14px;
+        padding-left: 73px;
+        display: inline-block;
+        font-family: 'Kelly Slab', cursive;
+        color: #fff;
+        font-size: 25px;
+    }
+
+    &__nav-list {
+        margin: 0;
+        padding: 0;
+    }
+
+    &__nav-list ul li{
+        display: inline;
+        color: #fff;
+        font-size: 14px;
+        margin-left: 20px;
+        font-family: 'Lato', sans-serif;
+        cursor: pointer;
+    }
+
+    &__nav-list ul {
+        left: 71%;
+        top: 22px;
+        position: absolute;
+    }
+}
+
+.text-decoration {
+    text-decoration: none;
+}

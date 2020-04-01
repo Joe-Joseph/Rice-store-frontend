@@ -1,15 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Form from '../components/Form';
+import Input from '../components/common/Input';
 
-const RightContainer = ({data, handleChanges, handleSubmit}) => {
+const RightContainer = ({ handleChanges, handleSubmit }) => {
     return (
-        <div className="container__right">
+        <div className="page-container__right">
             <div className="form-header">
                 <h2>Sign in to Rice Store</h2>
                 <p>Use your registered email</p>
             </div>
-            <Form data={data} handleChanges={handleChanges}handleSubmit={handleSubmit}/>
+            <Form handleSubmit={handleSubmit} className="form">
+                <Input type="email" inputName="email" placeholder="Email" inputId="email" handleChanges={handleChanges}/>
+                <Input type="password" inputName="password" placeholder="Password" inputId="password" handleChanges={handleChanges}/>
+                <p className="password-reset">Reset your password</p>
+                <button type="submit" className="button btn-sign">Signin</button>
+            </Form>
         </div>
     );
 };

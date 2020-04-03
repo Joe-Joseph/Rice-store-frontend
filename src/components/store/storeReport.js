@@ -1,24 +1,75 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import LeftContainer from '../../container/LeftContainer';
+import MyTable from '../common/Table';
+import ReusableTable from '../common/ReusableTable';
+import NavBar from '../NavBar';
+import SellProduct from '../store/SellProduct';
+import AddRound from './AddRound';
+import AddProduct from './AddProduct';
 
-const storeReport = props => {
+
+const StoreReport = ({ modal, toggle, component, closemodal, handleChanges, attributes }) => {
+    const firstName = localStorage.getItem('firstName');
+
     return (
-        <div className="container">
-        <div className="container__content">
-            <LeftContainer />
-            <RightContainer
-                handleChanges={handleChanges}
-                handleSubmit={handleSubmit}
-                data={data}
+        <div>
+            <NavBar
+                navBar="nav-bar"
+                homeTitle="nav-bar__home-title"
+                navList="nav-bar__nav-list"
+                textDecoration="text-decoration"
+                toggle={ toggle }
             />
-        </div>
+            <div className="page-container">
+            <div className="page-container__content margin-top">
+                <LeftContainer userFirstName={ `Hello ${firstName}` }/>
+                <div className="report-container">
+                    <div className="report-container__sold">
+                    <p className="report-title">Sold Bags</p>
+                    <MyTable />
+                    </div>
+                    <button className="btn-history">History</button>
+                    <div className="report-container__remaining">
+                        <p className="report-title">Remaining Bags</p>
+                        <ReusableTable />
+                    </div>
+                    <button className="btn-sell" onClick={toggle}>Sell</button>
+                    {
+                        (component==='sell') ?
+                            <SellProduct
+                                modal={modal}
+                                toggle={ toggle }
+                                closemodal={closemodal}
+                                handleChanges={handleChanges}
+                                attributes={attributes}
+                            />
+                        : (component==='addRound') ?
+                            <AddRound
+                                modal={modal}
+                                toggle={toggle}
+                                closemodal={closemodal}
+                                handleChanges={handleChanges}
+                                attributes={attributes}
+                            />
+                        : (component==='addProduct') ?
+                            <AddProduct
+                                modal={modal}
+                                toggle={toggle}
+                                closemodal={closemodal}
+                                handleChanges={handleChanges}
+                                attributes={attributes}
+                            />: null
+                    }
+
+                </div>
+            </div>
+            </div>
         </div>
     );
 };
 
-storeReport.propTypes = {
+StoreReport.propTypes = {
     
 };
 
-export default storeReport;
+export default StoreReport;

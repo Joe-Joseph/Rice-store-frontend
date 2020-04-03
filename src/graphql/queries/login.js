@@ -4,6 +4,7 @@ const USER_LOGIN = gql`
 mutation($email: String!, $password: String!,){
     loginUser(email: $email, password: $password){
         email
+        firstName
         token
     }
 }`

@@ -42,12 +42,14 @@
     margin-top: 9%;
 }
 
-.btn {
+.button {
     margin-top: 10%;
     margin-left: 45%;
     padding: 0.6rem 5rem;
     border-radius: 0.5rem;
     background-color: #15938F;
     color: #fff;
+}
+.button:focus{
     outline: none;
 }

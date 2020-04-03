@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-.container {
+.page-container {
     background-color: #F6F6F6;
     height: 100vh;
     position: relative;
 
     &__content {
         position: absolute;
-        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #fff;
@@ -54,4 +53,8 @@
         transform: translate(-2%, -50%);
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
     }
+}
+
+.margin-top-login {
+ margin-top: 28.7%;
 }

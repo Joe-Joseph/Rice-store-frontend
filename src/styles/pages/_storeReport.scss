@@ -1,0 +1,63 @@
+.report-container {
+    position: absolute;
+    top: 50%;
+    left: 52%;
+    transform: translate(-20%, -50%);
+    border-radius: 5px;
+    background-color: #FFF;
+    box-shadow: 0 2px 7px 0 rgba(0,0,0,0.14);
+    width: 47%;
+
+    &__sold{
+        border-radius: 5px;
+        margin-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+        width: 55%;
+        margin-left: 24%;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+    }
+
+    &__remaining{
+        border-radius: 5px;
+        margin-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+        width: 36%;
+        margin-left: 34%;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+    }
+}
+
+.btn-history {
+    background-color: #16938e;
+    color: white;
+    padding: 5px 30px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 85%;
+    left: 40px;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn-sell {
+    background-color: #16938e;
+    color: white;
+    padding: 5px 30px;
+    border-radius: 5px;
+    font-size: 14px;
+    position: absolute;
+    top: 85%;
+    left: 80%;
+    cursor: pointer;
+}
+
+.btn-sell:focus {
+    outline: none;
+}
+
+.margin-top {
+    margin-top: 26.5%;
+}

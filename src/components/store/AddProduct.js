@@ -22,7 +22,6 @@ const AddProduct = ({ modal, toggle, closemodal, handleChanges, attributes }) =>
         })
     }
 
-    data && console.log('====BYARANGIYE====', data);
     return (
         <ModalExample
             modal={modal}
@@ -30,9 +29,9 @@ const AddProduct = ({ modal, toggle, closemodal, handleChanges, attributes }) =>
             closemodal={ closemodal }
         >
             <Form buttonName="Submit" handleSubmit={handleSubmit} toggle={toggle} className="modal-form">
-                <Input type="text" placeholder="Rice type" inputName="productName" handleChanges={handleChanges}/>
-                <Input type="number" placeholder="Bag size" inputName="bagSize" handleChanges={handleChanges}/>
-                <Input type="number" placeholder="Bag quantity" inputName="quantity" handleChanges={handleChanges}/>
+                <Input type="text" classes="form__input" placeholder="Rice type" inputName="productName" handleChanges={handleChanges}/>
+                <Input type="number" classes="form__input" placeholder="Bag size" inputName="bagSize" handleChanges={handleChanges}/>
+                <Input type="number" classes="form__input" placeholder="Bag quantity" inputName="quantity" handleChanges={handleChanges}/>
                 <button type="submit" className="modal-button">Submit</button>
             </Form>
         </ModalExample>

@@ -24,8 +24,6 @@ const SellProduct = ({modal, toggle, closemodal, handleChanges, attributes }) =>
 
     data && closemodal();
 
-    data && console.log('DATA=========HERE=========WE=====GO', data);
-
     return (
         <ModalExample
             modal={modal}
@@ -33,10 +31,10 @@ const SellProduct = ({modal, toggle, closemodal, handleChanges, attributes }) =>
             closemodal={closemodal}
         >
             <Form buttonName="Submit" toggle={toggle} handleSubmit={handleSubmit} className="modal-form">
-                <Input type="text" placeholder="Rice type" inputName="rice" handleChanges={handleChanges}/>
-                <Input type="number" placeholder="Bag size" inputName="bagSize" handleChanges={handleChanges}/>
-                <Input type="number" placeholder="Price per bag" inputName="price" handleChanges={handleChanges}/>
-                <Input type="number" placeholder="Bag quantity" inputName="quantity" handleChanges={handleChanges}/>
+                <Input type="text" classes="form__input" placeholder="Rice type" inputName="rice" handleChanges={handleChanges}/>
+                <Input type="number" classes="form__input" placeholder="Bag size" inputName="bagSize" handleChanges={handleChanges}/>
+                <Input type="number" classes="form__input" placeholder="Price per bag" inputName="price" handleChanges={handleChanges}/>
+                <Input type="number" classes="form__input" placeholder="Bag quantity" inputName="quantity" handleChanges={handleChanges}/>
                 <button type="submit" className="modal-button">Submit</button>
             </Form>
         </ModalExample>

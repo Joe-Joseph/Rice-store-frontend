@@ -11,8 +11,8 @@ const RightContainer = ({ handleChanges, handleSubmit }) => {
                 <p>Use your registered email</p>
             </div>
             <Form handleSubmit={handleSubmit} className="form">
-                <Input type="email" inputName="email" placeholder="Email" inputId="email" handleChanges={handleChanges}/>
-                <Input type="password" inputName="password" placeholder="Password" inputId="password" handleChanges={handleChanges}/>
+                <Input type="email" classes="form__input" inputName="email" placeholder="Email" inputId="email" handleChanges={handleChanges}/>
+                <Input type="password" classes="form__input" inputName="password" placeholder="Password" inputId="password" handleChanges={handleChanges}/>
                 <p className="password-reset">Reset your password</p>
                 <button type="submit" className="button btn-sign">Signin</button>
             </Form>

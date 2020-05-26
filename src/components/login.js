@@ -19,6 +19,8 @@ const Login = () => {
         });
     };
 
+    console.log("+++++++++++", attributes);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         signIn({

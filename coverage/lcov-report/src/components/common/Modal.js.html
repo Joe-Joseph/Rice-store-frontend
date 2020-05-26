@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/container/RightContainer.js</title>
+    <title>Code coverage report for src/components/common/Modal.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/container</a> RightContainer.js</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/common</a> Modal.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
@@ -80,17 +80,11 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -107,41 +101,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import PropTypes from 'prop-types';
-import Form from '../components/Form';
-import Input from '../components/common/Input';
+import { Modal } from 'reactstrap';
 &nbsp;
-const RightContainer = <span class="fstat-no" title="function not covered" >({</span> handleChanges, handleSubmit }) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return (</span>
-        &lt;div className="page-container__right"&gt;
-            &lt;div className="form-header"&gt;
-                &lt;h2&gt;Sign in to Rice Store&lt;/h2&gt;
-                &lt;p&gt;Use your registered email&lt;/p&gt;
-            &lt;/div&gt;
-            &lt;Form handleSubmit={handleSubmit} className="form"&gt;
-                &lt;Input type="email" inputName="email" placeholder="Email" inputId="email" handleChanges={handleChanges}/&gt;
-                &lt;Input type="password" inputName="password" placeholder="Password" inputId="password" handleChanges={handleChanges}/&gt;
-                &lt;p className="password-reset"&gt;Reset your password&lt;/p&gt;
-                &lt;button type="submit" className="button btn-sign"&gt;Signin&lt;/button&gt;
-            &lt;/Form&gt;
+const ModalExample = <span class="fstat-no" title="function not covered" >({</span> modal, toggle, children, closemodal }) =&gt; {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return (</span>
+    &lt;div&gt;
+      &lt;Modal isOpen={modal} toggle={toggle} centered&gt;
+        &lt;div className="my-modal-header"&gt;
+          &lt;span className="sell-form-title"&gt;Fill the information&lt;/span&gt;
+          &lt;div className="close-modal" onClick={closemodal}&gt;
+            &amp;times;
+          &lt;/div&gt;
         &lt;/div&gt;
-    );
-};
+        &lt;div&gt;
+          {children}
+        &lt;/div&gt;
+      &lt;/Modal&gt;
+    &lt;/div&gt;
+  );
+}
 &nbsp;
-RightContainer.propTypes = {
-    data: PropTypes.object,
-    handleChanges: PropTypes.func,
-    handleSubmit: PropTypes.func
-};
-&nbsp;
-export default RightContainer;</pre></td></tr></table></pre>
+export default ModalExample;
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
@@ -151,14 +136,14 @@ export default RightContainer;</pre></td></tr></table></pre>
                 at Sat May 23 2020 15:16:27 GMT+0200 (Central Africa Time)
             </div>
         </div>
-        <script src="../../prettify.js"></script>
+        <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
     </body>
 </html>
     

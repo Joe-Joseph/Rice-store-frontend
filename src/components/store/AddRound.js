@@ -28,8 +28,8 @@ const AddRound = ({modal, toggle, closemodal, handleChanges, attributes}) => {
             closemodal={ closemodal }
         >
             <Form buttonName="Submit" handleSubmit={handleSubmit} toggle={ toggle } className="modal-form">
-                <Input type="text" placeholder="Car Plate" inputName="carPlate" handleChanges={handleChanges}/>
-                <Input type="text" placeholder="Driver Name" inputName="driverName" handleChanges={handleChanges}/>
+                <Input type="text" classes="form__input" placeholder="Car Plate" inputName="carPlate" handleChanges={handleChanges}/>
+                <Input type="text" classes="form__input" placeholder="Driver Name" inputName="driverName" handleChanges={handleChanges}/>
                 <button type="submit" className="modal-button">Submit</button>
             </Form>
         </ModalExample>

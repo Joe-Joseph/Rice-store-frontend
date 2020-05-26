@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/container/RightContainer.js</title>
+    <title>Code coverage report for src/graphql/ApolloClient.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/container</a> RightContainer.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/graphql</a> ApolloClient.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>3/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>3/5</span>
             </div>
         
             
@@ -90,7 +90,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -99,49 +107,41 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import PropTypes from 'prop-types';
-import Form from '../components/Form';
-import Input from '../components/common/Input';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ApolloClient } from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 &nbsp;
-const RightContainer = <span class="fstat-no" title="function not covered" >({</span> handleChanges, handleSubmit }) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return (</span>
-        &lt;div className="page-container__right"&gt;
-            &lt;div className="form-header"&gt;
-                &lt;h2&gt;Sign in to Rice Store&lt;/h2&gt;
-                &lt;p&gt;Use your registered email&lt;/p&gt;
-            &lt;/div&gt;
-            &lt;Form handleSubmit={handleSubmit} className="form"&gt;
-                &lt;Input type="email" inputName="email" placeholder="Email" inputId="email" handleChanges={handleChanges}/&gt;
-                &lt;Input type="password" inputName="password" placeholder="Password" inputId="password" handleChanges={handleChanges}/&gt;
-                &lt;p className="password-reset"&gt;Reset your password&lt;/p&gt;
-                &lt;button type="submit" className="button btn-sign"&gt;Signin&lt;/button&gt;
-            &lt;/Form&gt;
-        &lt;/div&gt;
-    );
-};
 &nbsp;
-RightContainer.propTypes = {
-    data: PropTypes.object,
-    handleChanges: PropTypes.func,
-    handleSubmit: PropTypes.func
-};
+const httpLink = createHttpLink({
+  uri: 'https://rice-store.herokuapp.com/',
+});
 &nbsp;
-export default RightContainer;</pre></td></tr></table></pre>
+const authLink = setContext(<span class="fstat-no" title="function not covered" >(_</span>, { headers }) =&gt; {
+  // get the authentication token from local storage if it exists
+  const token = <span class="cstat-no" title="statement not covered" >localStorage.getItem('token');</span>
+  // return the headers to the context so httpLink can read them
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+});
+&nbsp;
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
+});
+&nbsp;
+export default client;
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

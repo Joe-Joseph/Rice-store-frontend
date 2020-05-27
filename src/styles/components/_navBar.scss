@@ -30,6 +30,10 @@
         cursor: pointer;
     }
 
+    &__nav-list ul li:hover{
+        color: #fbc00e;
+    }
+
     &__nav-list ul {
         left: 71%;
         top: 22px;
@@ -37,6 +41,6 @@
     }
 }
 
-.text-decoration {
+.text-decoration:hover {
     text-decoration: none;
 }

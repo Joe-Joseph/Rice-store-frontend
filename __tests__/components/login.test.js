@@ -14,7 +14,7 @@ describe('<Login /> component', () => {
     it('Should input data', () => {
         const emailInput = wrapper.find('#email');
         const passwordInput = wrapper.find('#password');
-        const submitButton = wrapper.find('.btn');
+        const submitButton = wrapper.find('.button');
         act(() => {
             emailInput.simulate('change', { target: { value: 'test@test.com', name: 'email' }});
             passwordInput.simulate('change', { target: { value: 'password', name: 'password' }});

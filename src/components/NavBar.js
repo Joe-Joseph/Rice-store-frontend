@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const NavBar = ({ navBar, homeTitle, navList, textDecoration, toggle }) => {
     return (
         <div className={`${navBar}`}>
-            <Link to='/home'>
+            <Link to='/report'>
                 <div className={`${homeTitle}`}>
                     <h1>Rice-Store</h1>
                 </div>

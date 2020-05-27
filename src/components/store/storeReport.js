@@ -51,6 +51,7 @@ const StoreReport = ({ modal, toggle, component, closemodal, handleChanges, attr
 
     return (
         <div>
+            <div className="page-container">
             <NavBar
                 navBar="nav-bar"
                 homeTitle="nav-bar__home-title"
@@ -58,7 +59,6 @@ const StoreReport = ({ modal, toggle, component, closemodal, handleChanges, attr
                 textDecoration="text-decoration"
                 toggle={ toggle }
             />
-            <div className="page-container">
             <div className="page-container__content margin-top">
                 <LeftContainer userFirstName={ `Hello ${firstName}` }/>
                 <div className="report-container">

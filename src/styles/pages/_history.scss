@@ -18,10 +18,22 @@
         font-family: 'Lato', sans-serif;
     }
 
+    &__link-list ul li a{
+        text-decoration: none;
+    }
+
+    &__link-list ul li:hover{
+        color: #fbc00e;
+    }
+
     &__text-decoration {
         text-decoration: none;
         display: block;
         margin-bottom: 30px;
+    }
+
+    &__text-decoration:hover {
+        text-decoration: none;
     }
 
     &__app-title {
@@ -34,8 +46,8 @@
     }
 }
 .history-content{
-    margin-left: 19%;
-    margin-top: -56%;
+    margin-left: 250px;
+    margin-top: -805px;
     max-height: 98vh;
     overflow: scroll;
 }

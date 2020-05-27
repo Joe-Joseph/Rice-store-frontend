@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
-import Login from '../components/login';
-import StoreReport from '../components/store/StoreReport';
-import History from '../components/store/History';
+import Login from './login';
+import StoreReport from './store/storeReport';
+import History from './store/History';
 
 
 const App = () => {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
+import Logout from './Logout';
 import Login from './login';
 import StoreReport from './store/storeReport';
 import History from './store/History';
@@ -53,8 +54,9 @@ const App = () => {
                         attributes={attributes}
                     />
                 </Route>
-                <Route exact path='/Logout' component={Login} />
-                <Route exact path='/home' component={StoreReport} />
+                <Route exact path='/logout'>
+                    <Logout/>
+                </Route>
             </Switch>
         </BrowserRouter>
         );

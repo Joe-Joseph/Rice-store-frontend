@@ -3,12 +3,17 @@ import { Table } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 const TransctionCard = ({ transaction, firstName }) => {
+    console.log('Transactions >>>>>>', transaction)
     return (
         <div className="transa-card">
             <table>
                 <tbody>
                     <tr className="history-report-data">
-                        <td>Rice Type</td>
+                        <td>Category</td>
+                        <td>{ transaction.productType }</td>
+                    </tr>
+                    <tr className="history-report-data">
+                        <td>{ transaction.productType === 'rice' ? 'Rice name' : 'product name' }</td>
                         <td>{ transaction.productName }</td>
                     </tr>
                     <tr className="history-report-data">
@@ -17,7 +22,7 @@ const TransctionCard = ({ transaction, firstName }) => {
                     </tr>
                     <tr className="history-report-data">
                         <td>Quantity</td>
-                        <td>{ transaction.addedQuantity }</td>
+                        <td>{ transaction.quantity }</td>
                     </tr>
                     <tr className="history-report-data">
                         <td>1 Bag</td>
@@ -25,20 +30,20 @@ const TransctionCard = ({ transaction, firstName }) => {
                     </tr>
                     <tr className="history-report-data">
                         <td>Total bags</td>
-                        <td>{ transaction.currentQuantity }</td>
+                        <td>{ transaction.totalCost }</td>
                     </tr>
                     <tr className="history-report-data">
-                        <td>Employee</td>
-                        <td>{ firstName }</td>
+                        <td>Date</td>
+                        <td>{ transaction.createdAt }</td>
                     </tr>
                     <tr className="history-report-data">
                         <td>Transaction Type</td>
                         <td>{ transaction.transactionType }</td>
                     </tr>
-                    <tr className="history-report-data">
+                    {/* <tr className="history-report-data">
                         <td>Total Cost</td>
                         <td>{ transaction.totalCost}</td>
-                    </tr>
+                    </tr> */}
                 </tbody>
             </table>
         </div>

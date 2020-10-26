@@ -1,96 +1,440 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import { useQuery } from '@apollo/react-hooks';
-import LeftContainer from '../../container/LeftContainer';
-import StoreCurrentState from '../common/StoreCurrentState';
+import ReportCards from './ReportCards';
 import Input from '../common/Input';
 import NavBar from '../NavBar';
 import SellProduct from '../store/SellProduct';
 import AddRound from './AddRound';
 import AddProduct from './AddProduct';
 import STORE_HISTORY from '../../graphql/queries/transactions';
+import GET_ALL_PRODUCTS from '../../graphql/queries/getAllProducts';
 
+let transactions
+let allProducts
+const StoreReport = ({
+    modal,
+    toggle,
+    component,
+    closemodal,
+    handleChanges,
+    attributes,
+}) => {
+    // const [transactions, setTransactions] = useState()
+    // const [allProducts, setAllProductions] = useState()
 
-const StoreReport = ({ modal, toggle, component, closemodal, handleChanges, attributes }) => {
     const { data } = useQuery(STORE_HISTORY);
-    const transactions = data && data.getTransactionsByRound;
+    const products = useQuery(GET_ALL_PRODUCTS);
+    const transactions = data && data.getAllTransactions;
+    const allProducts = products && products.data && products.data.getAllProducts;
 
-    let totalSoldBags = 0;
-    let totalAddedBags = 0;
-    let totalSoldBagsMoney = 0;
-    let totalBags = 0;
-    let totalBagsCost = 0;
-    let totalAllAddedBags = 0;
+    // setTransactions(allTransactions)
+    // setAllProductions(getProducts)
 
-    transactions && transactions.forEach(element => {
-        if(element.transactionType === 'added' && element.bagSize === attributes.kg) {
-            totalAddedBags = totalAddedBags + parseInt(element.addedQuantity);
+    // useEffect(() => {
+    //     data && setTransactions(data.getAllTransactions);
+    //     products && products.data && setAllProductions(products.data.getAllProducts);
+    // })
+    
+
+    let totalRiceSoldBags = 0;
+    let totalRiceSoldBagsMoney = 0;
+    let totalRiceBags = 0;
+    let totalRiceBagsCost = 0;
+    let remainingRiceBagsBykg = 0;
+    let allRemainingBags = 0;
+
+    let totalCimentSoldBags = 0;
+    let totalCimentSoldBagsMoney = 0;
+    let totalCimentBags = 0;
+    let totalCimentBagsCost = 0;
+    let totalCimentRemainingBags = 0;
+    let remainingCimentBagsBykg = 0
+
+    if(attributes.period === 'today'){
+        transactions && transactions.forEach(transaction => {
+            let year = transaction.createdAt.split('/')[2]
+            let month = transaction.createdAt.split('/')[0]
+            let day = transaction.createdAt.split('/')[1]
+
+            let thisYear = moment(Date.now()).format('L').split('/')[2]
+            let thisMonth = moment(Date.now()).format('L').split('/')[0]
+            let thisDay = moment(Date.now()).format('L').split('/')[1]
+
+            if(transaction.transactionType === 'sold'
+                && year === thisYear
+                && month === thisMonth
+                && day === thisDay
+            ){
+                transaction.productType === 'rice' ? (
+                    totalRiceBagsCost = totalRiceBagsCost + parseInt(transaction.totalCost),
+                    totalRiceBags = totalRiceBags + parseInt(transaction.quantity)
+                ):
+                transaction.productType === 'ciment' && (
+                    totalCimentBagsCost = totalCimentBagsCost + parseInt(transaction.totalCost),
+                    totalCimentBags = totalCimentBags + parseInt(transaction.quantity)  
+                )
+            }
+            if(year === thisYear
+                && month === thisMonth
+                && day === thisDay
+                && transaction.transactionType === 'sold'
+                && transaction.bagSize === attributes.kg
+                && transaction.productName === attributes.productName.toLowerCase()
+                // && transaction.productType === 'rice'
+            ){
+                transaction.productType === 'rice'? (
+                    totalRiceSoldBags = totalRiceSoldBags + parseInt(transaction.quantity),
+                    totalRiceSoldBagsMoney = totalRiceSoldBagsMoney + parseInt(transaction.totalCost)
+                ):
+                transaction.productType === 'ciment' && (
+                    totalCimentSoldBags = totalCimentSoldBags + parseInt(transaction.quantity),
+                    totalCimentSoldBagsMoney = totalCimentSoldBagsMoney + parseInt(transaction.totalCost)
+                )
+            }
+        })
+    }
+
+    if(attributes.period === 'yesterday'){
+        transactions && transactions.forEach(transaction => {
+            let year = transaction.createdAt.split('/')[2]
+            let month = transaction.createdAt.split('/')[0]
+            let day = transaction.createdAt.split('/')[1]
+
+            let thisYear = moment(Date.now()).format('L').split('/')[2]
+            let thisMonth = moment(Date.now()).format('L').split('/')[0]
+            let thisDay = moment(Date.now()).format('L').split('/')[1]
+
+            console.log('DAY HHHH>>>>', attributes)
+
+            if(transaction.transactionType === 'sold'
+                && year === thisYear
+                && month === thisMonth
+                && parseInt(day) === parseInt(thisDay) - 1
+            ){
+                transaction.productType === 'rice' ? (
+                    totalRiceBagsCost = totalRiceBagsCost + parseInt(transaction.totalCost),
+                    totalRiceBags = totalRiceBags + parseInt(transaction.quantity)
+                ):
+                transaction.productType === 'ciment' && (
+                    totalCimentBagsCost = totalCimentBagsCost + parseInt(transaction.totalCost),
+                    totalCimentBags = totalCimentBags + parseInt(transaction.quantity)  
+                )
+            }
+            if(year === thisYear
+                && month === thisMonth
+                && parseInt(day) === parseInt(thisDay) - 1
+                && transaction.transactionType === 'sold'
+                && transaction.bagSize === attributes.kg
+                && transaction.productName === attributes.productName.toLowerCase()
+                // && transaction.productType === 'rice'
+            ){
+                transaction.productType === 'rice'? (
+                    totalRiceSoldBags = totalRiceSoldBags + parseInt(transaction.quantity),
+                    totalRiceSoldBagsMoney = totalRiceSoldBagsMoney + parseInt(transaction.totalCost)
+                ):
+                transaction.productType === 'ciment' && (
+                    totalCimentSoldBags = totalCimentSoldBags + parseInt(transaction.quantity),
+                    totalCimentSoldBagsMoney = totalCimentSoldBagsMoney + parseInt(transaction.totalCost)
+                )
+            }
+        })
+    }
+
+    if(attributes.period === 'month'){
+        transactions && transactions.forEach(transaction => {
+            let year = transaction.createdAt.split('/')[2]
+            let month = transaction.createdAt.split('/')[0]
+
+            let thisYear = moment(Date.now()).format('L').split('/')[2]
+            let thisMonth = moment(Date.now()).format('L').split('/')[0]
+
+            if(transaction.transactionType === 'sold'
+                && year === thisYear
+                && month === thisMonth
+            ){
+                transaction.productType === 'rice' ? (
+                    totalRiceBagsCost = totalRiceBagsCost + parseInt(transaction.totalCost),
+                    totalRiceBags = totalRiceBags + parseInt(transaction.quantity)
+                ):
+                transaction.productType === 'ciment' && (
+                    totalCimentBagsCost = totalCimentBagsCost + parseInt(transaction.totalCost),
+                    totalCimentBags = totalCimentBags + parseInt(transaction.quantity)  
+                )
+            }
+            if(year === thisYear
+                && month === thisMonth
+                && transaction.transactionType === 'sold'
+                && transaction.bagSize === attributes.kg
+                && transaction.productName === attributes.productName.toLowerCase()
+                // && transaction.productType === 'rice'
+            ){
+                transaction.productType === 'rice'? (
+                    totalRiceSoldBags = totalRiceSoldBags + parseInt(transaction.quantity),
+                    totalRiceSoldBagsMoney = totalRiceSoldBagsMoney + parseInt(transaction.totalCost)
+                ):
+                transaction.productType === 'ciment' && (
+                    totalCimentSoldBags = totalCimentSoldBags + parseInt(transaction.quantity),
+                    totalCimentSoldBagsMoney = totalCimentSoldBagsMoney + parseInt(transaction.totalCost)
+                )
+            }
+        })
+    }
+
+    if(attributes.period === 'lastMonth'){
+        transactions && transactions.forEach(transaction => {
+            let year = transaction.createdAt.split('/')[2]
+            let month = transaction.createdAt.split('/')[0]
+
+            let thisYear = moment(Date.now()).format('L').split('/')[2]
+            let thisMonth = moment(Date.now()).format('L').split('/')[0]
+
+            if(transaction.transactionType === 'sold'
+                && year === thisYear
+                && parseInt(month) === parseInt(thisMonth) - 1
+            ){
+                transaction.productType === 'rice' ? (
+                    totalRiceBagsCost = totalRiceBagsCost + parseInt(transaction.totalCost),
+                    totalRiceBags = totalRiceBags + parseInt(transaction.quantity)
+                ):
+                transaction.productType === 'ciment' && (
+                    totalCimentBagsCost = totalCimentBagsCost + parseInt(transaction.totalCost),
+                    totalCimentBags = totalCimentBags + parseInt(transaction.quantity)  
+                )
+            }
+            if(year === thisYear
+                && parseInt(month) === parseInt(thisMonth) - 1
+                && transaction.transactionType === 'sold'
+                && transaction.bagSize === attributes.kg
+                && transaction.productName === attributes.productName.toLowerCase()
+                // && transaction.productType === 'rice'
+            ){
+                transaction.productType === 'rice'? (
+                    totalRiceSoldBags = totalRiceSoldBags + parseInt(transaction.quantity),
+                    totalRiceSoldBagsMoney = totalRiceSoldBagsMoney + parseInt(transaction.totalCost)
+                ):
+                transaction.productType === 'ciment' && (
+                    totalCimentSoldBags = totalCimentSoldBags + parseInt(transaction.quantity),
+                    totalCimentSoldBagsMoney = totalCimentSoldBagsMoney + parseInt(transaction.totalCost)
+                )
+            }
+        })
+    }
+
+    if(attributes.period === 'year'){
+        transactions && transactions.forEach(transaction => {
+            let year = transaction.createdAt.split('/')[2]
+
+            let thisYear = moment(Date.now()).format('L').split('/')[2]
+
+            if(transaction.transactionType === 'sold'
+                && year === thisYear
+            ){
+                transaction.productType === 'rice' ? (
+                    totalRiceBagsCost = totalRiceBagsCost + parseInt(transaction.totalCost),
+                    totalRiceBags = totalRiceBags + parseInt(transaction.quantity)
+                ):
+                transaction.productType === 'ciment' && (
+                    totalCimentBagsCost = totalCimentBagsCost + parseInt(transaction.totalCost),
+                    totalCimentBags = totalCimentBags + parseInt(transaction.quantity)  
+                )
+            }
+            if(year === thisYear
+                && transaction.transactionType === 'sold'
+                && transaction.bagSize === attributes.kg
+                && transaction.productName === attributes.productName.toLowerCase()
+                // && transaction.productType === 'rice'
+            ){
+                transaction.productType === 'rice'? (
+                    totalRiceSoldBags = totalRiceSoldBags + parseInt(transaction.quantity),
+                    totalRiceSoldBagsMoney = totalRiceSoldBagsMoney + parseInt(transaction.totalCost)
+                ):
+                transaction.productType === 'ciment' && (
+                    totalCimentSoldBags = totalCimentSoldBags + parseInt(transaction.quantity),
+                    totalCimentSoldBagsMoney = totalCimentSoldBagsMoney + parseInt(transaction.totalCost)
+                )
+            }
+        })
+    }
+
+    if(attributes.period === 'lastYear'){
+        transactions && transactions.forEach(transaction => {
+            let year = transaction.createdAt.split('/')[2]
+
+            let thisYear = moment(Date.now()).format('L').split('/')[2]
+
+            if(transaction.transactionType === 'sold'
+                && parseInt(year) === parseInt(thisYear) - 1
+            ){
+                transaction.productType === 'rice' ? (
+                    totalRiceBagsCost = totalRiceBagsCost + parseInt(transaction.totalCost),
+                    totalRiceBags = totalRiceBags + parseInt(transaction.quantity)
+                ):
+                transaction.productType === 'ciment' && (
+                    totalCimentBagsCost = totalCimentBagsCost + parseInt(transaction.totalCost),
+                    totalCimentBags = totalCimentBags + parseInt(transaction.quantity)  
+                )
+            }
+            if(parseInt(year) === parseInt(thisYear) - 1
+                && transaction.transactionType === 'sold'
+                && transaction.bagSize === attributes.kg
+                && transaction.productName === attributes.productName.toLowerCase()
+                // && transaction.productType === 'rice'
+            ){
+                transaction.productType === 'rice'? (
+                    totalRiceSoldBags = totalRiceSoldBags + parseInt(transaction.quantity),
+                    totalRiceSoldBagsMoney = totalRiceSoldBagsMoney + parseInt(transaction.totalCost)
+                ):
+                transaction.productType === 'ciment' && (
+                    totalCimentSoldBags = totalCimentSoldBags + parseInt(transaction.quantity),
+                    totalCimentSoldBagsMoney = totalCimentSoldBagsMoney + parseInt(transaction.totalCost)
+                )
+            }
+        })
+    }
+
+    allProducts && allProducts.forEach(product => {
+        product.productType === 'rice' ?
+        allRemainingBags = allRemainingBags + parseInt(product.quantity):
+        product.productType === 'ciment' ?
+        totalCimentRemainingBags = totalCimentRemainingBags + parseInt(product.quantity): null
+
+        if(product.productName === attributes.productName.toLowerCase()
+            && product.bagSize === attributes.kg
+            // && product.productType === 'rice'
+        ){
+            product.productType === 'rice' ?
+            remainingRiceBagsBykg = product.quantity:
+            product.productType === 'ciment' ?
+            remainingCimentBagsBykg = product.quantity: null
         }
-
-        if(element.transactionType === 'sold' && element.bagSize === attributes.kg) {
-            totalSoldBags = totalSoldBags + parseInt(element.addedQuantity);
-            totalSoldBagsMoney = totalSoldBagsMoney + parseInt(element.totalCost);
-        }
-    });
-
-    const remainingBags = totalAddedBags - totalSoldBags;
-
-    transactions && transactions.forEach(element => {
-        if(element.transactionType === 'sold'){
-            totalBags = totalBags + parseInt(element.addedQuantity);
-            totalBagsCost = totalBagsCost + parseInt(element.totalCost);
-        }
-
-        if(element.transactionType === 'added'){
-            totalAllAddedBags = totalAllAddedBags + parseInt(element.addedQuantity);
-        }
-    });
-
-    const allRemainingBags = totalAllAddedBags - totalBags;
-
-    const firstName = localStorage.getItem('firstName');
+    })
 
     return (
         <div>
-            <div className="page-container">
-            <NavBar
-                navBar="nav-bar"
-                homeTitle="nav-bar__home-title"
-                navList="nav-bar__nav-list"
-                textDecoration="text-decoration"
-                toggle={ toggle }
-            />
-            <div className="page-container__content margin-top">
-                <LeftContainer userFirstName={ `Hello ${firstName}` }/>
+            <div className="content">
+                <NavBar
+                    navBar="side-bar"
+                    homeTitle="side-bar__app-title"
+                    navList="side-bar__link-list"
+                    textDecoration="side-bar__text-decoration"
+                    toggle={ toggle }
+                />
                 <div className="report-container">
-                    <div className="report-container__sold">
-                        <p className="report-title">Sold Bags</p>
-                        <Input classes="kg-input" type="number" placeholder="Enter bag size" inputName="kg" handleChanges={handleChanges}/>
-                        <p className="report-title move-up"> {attributes.kg ? `${attributes.kg} kg` : 'kg'}</p>
-                        <StoreCurrentState
-                            containerClass="report"
-                            bagClass="bags"
-                            moneyClass="money"
-                            blockClass="bags-block"
-                            totalSoldBags={totalSoldBags}
-                            totalSoldBagsMoney={totalSoldBagsMoney}
+                    <div className="filters">
+                        <Input
+                            classes="kg-input"
+                            type="number"
+                            placeholder="Enter bag size"
+                            inputName="kg"
+                            handleChanges={handleChanges}
+                        />
+                        <Input
+                            classes="kg-input"
+                            type="text"
+                            placeholder="Enter product name"
+                            inputName="productName"
+                            handleChanges={handleChanges}
+                        />
+                        <div className='report-by-date'>
+                            <div className="radio__group">
+                                <input
+                                    type='radio'
+                                    name='period'
+                                    value='today'
+                                    checked={ attributes.period === 'today' }
+                                    onChange={handleChanges}
+                                    className="radio-style"
+                                />
+                                <label htmlFor="today">Today</label>
+                            </div>
+
+                            <div className="radio__group">
+                                <input
+                                    type='radio'
+                                    name='period'
+                                    value='yesterday'
+                                    checked={ attributes.period === 'yesterday' }
+                                    onChange={handleChanges}
+                                    className="radio-style"
+                                />
+                                <label htmlFor="yesterday">Yesterday</label>
+                            </div>
+
+                            <div className="radio__group">
+                                <input
+                                    type='radio'
+                                    name='period'
+                                    value='month'
+                                    checked={ attributes.period === 'month' }
+                                    onChange={handleChanges}
+                                    className="radio-style"
+                                />
+                                <label htmlFor="month">Month</label>
+                            </div>
+   
+                            <div className="radio__group">
+                                <input
+                                    type='radio'
+                                    name='period'
+                                    value='lastMonth'
+                                    checked={ attributes.period === 'lastMonth' }
+                                    onChange={handleChanges}
+                                    className="radio-style"
+                                />
+                                <label htmlFor="month">Last Month</label>
+                            </div>
+                            <div className="radio__group">
+                                <input
+                                    type='radio'
+                                    name='period'
+                                    value='year'
+                                    checked={ attributes.period === 'year' }
+                                    onChange={handleChanges}
+                                    className="radio-style"
+                                />
+                                <label htmlFor="month">This Year</label>
+                            </div>
+                            <div className="radio__group">
+                                <input
+                                    type='radio'
+                                    name='period'
+                                    value='lastYear'
+                                    checked={ attributes.period === 'lastYear' }
+                                    onChange={handleChanges}
+                                    className="radio-style"
+                                />
+                                <label htmlFor="month">Last Year</label>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div className='report_cards'>
+                        <ReportCards
+                            totalRiceSoldBags={totalRiceSoldBags}
+                            totalRiceSoldBagsMoney={totalRiceSoldBagsMoney}
+                            attributes={attributes}
+                            totalRiceBags={totalRiceBags}
+                            totalRiceBagsCost={totalRiceBagsCost}
+                            remainingRiceBagsBykg={remainingRiceBagsBykg}
+                            allRemainingBags={allRemainingBags}
+                            title='Rice'
+                            productName={attributes.productName}
                         />
 
-                        <p className="report-title">Total</p>
-
-                        <div className="report">
-                            <div className="bags">{ totalBags ? totalBags : 0 } <span className="bags-block">bags</span></div>
-                            <div className="money">{ totalBagsCost ? totalBagsCost : 0 } <span className="bags-block">Frw</span></div>
-                        </div>
+                        <ReportCards
+                            totalRiceSoldBags={totalCimentSoldBags}
+                            totalRiceSoldBagsMoney={totalCimentSoldBagsMoney}
+                            attributes={attributes}
+                            totalRiceBags={totalCimentBags}
+                            totalRiceBagsCost={totalCimentBagsCost}
+                            remainingRiceBagsBykg={remainingCimentBagsBykg}
+                            allRemainingBags={totalCimentRemainingBags}
+                            title='Ciment'
+                        />
                     </div>
-                    <button className="btn-history">History</button>
-                    <div className="report-container__remaining">
-                        <p className="report-title">Remaining Bags</p>
-                        <div className="report move-down">
-                            <div className="bags">{ remainingBags && remainingBags} <span className="bags-block">bags</span></div>
-                            <div className="money">{ allRemainingBags ? allRemainingBags : 0 } <span className="bags-block">bags</span></div>
-                        </div>
-                    </div>
-                    <button className="btn-sell" onClick={toggle}>Sell</button>
+                    
                     {
                         (component==='sell') ?
                             <SellProduct
@@ -119,7 +463,6 @@ const StoreReport = ({ modal, toggle, component, closemodal, handleChanges, attr
                     }
 
                 </div>
-            </div>
             </div>
         </div>
     );

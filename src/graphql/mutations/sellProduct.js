@@ -1,18 +1,16 @@
 import gql from 'graphql-tag';
 
 const SELL_PRODUCT = gql`
-mutation($productName: String!, $bagSize: Int!, $oneBagCost: Int!, $soldQuantity: Int!){
-    sellProduct(productName: $productName, bagSize: $bagSize, oneBagCost: $oneBagCost, soldQuantity: $soldQuantity){
-        roundId
+mutation($productName: String!, $productType: String!, $bagSize: Int!, $oneBagCost: Int!, $quantity: Int!){
+    sellProduct(productName: $productName, productType: $productType, bagSize: $bagSize, oneBagCost: $oneBagCost, quantity: $quantity){
         employee
         productName
         bagSize
         oneBagCost
-        addedQuantity
+        quantity
         currentQuantity
         transactionType
         totalCost
-        totalBags
     }
 }`
 

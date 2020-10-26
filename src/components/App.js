@@ -6,9 +6,13 @@ import Login from './login';
 import StoreReport from './store/storeReport';
 import History from './store/History';
 
-
+const initialState = {
+    productName: 'byabuze',
+    kg: '25',
+    period: 'today'
+}
 const App = () => {
-    const [ attributes, setAttributes ] = useState({});
+    const [ attributes, setAttributes ] = useState({ ...initialState });
     const [modal, setModal] = useState(false);
     const [component, setComponent] = useState('');
 
@@ -19,6 +23,7 @@ const App = () => {
 
     const closemodal = () => {
         setModal(false);
+        setAttributes(initialState)
     }
 
     const handleChanges = (e) => {
@@ -27,6 +32,14 @@ const App = () => {
             [e.target.name]: e.target.value
         });
     };
+
+    // const handleRadioClick = (e) => {
+    //     console.log('hhhhhhh', e)
+    //     setAttributes({
+    //         ...attributes,
+    //         [e.target.name]: e.target.value
+    //     });
+    // }
 
     return (
         <BrowserRouter>

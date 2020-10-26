@@ -2,18 +2,16 @@ import gql from 'graphql-tag';
 
 const STORE_HISTORY = gql`
     query transactions{
-        getTransactionsByRound{
+        getAllTransactions{
             transactionId
-            roundId
-            employee
+            productId
             productName
+            productType
             bagSize
             oneBagCost
-            addedQuantity
-            currentQuantity
+            quantity
             transactionType
             totalCost
-            totalBags
             createdAt
         }
     }`

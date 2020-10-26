@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import logo from '../images/logo.png'
 import PropTypes from 'prop-types';
 
 const NavBar = ({ navBar, homeTitle, navList, textDecoration, toggle }) => {
@@ -7,7 +8,7 @@ const NavBar = ({ navBar, homeTitle, navList, textDecoration, toggle }) => {
         <div className={`${navBar}`}>
             <Link to='/report'>
                 <div className={`${homeTitle}`}>
-                    <h1>Rice-Store</h1>
+                    <img src={logo} className="logo"/>
                 </div>
             </Link>
             <div className={`${navList}`}>
@@ -16,9 +17,9 @@ const NavBar = ({ navBar, homeTitle, navList, textDecoration, toggle }) => {
                         <li onClick={() => toggle('sell')} id='sell'>Sell</li>
                     </Link>
 
-                    <Link to="#" className={`${textDecoration}`}>
+                    {/* <Link to="#" className={`${textDecoration}`}>
                         <li onClick={() => toggle('addRound')}>Add Round</li>
-                    </Link>
+                    </Link> */}
 
                     <Link to="#" className={`${textDecoration}`}>
                         <li onClick={() => toggle('addProduct')}>Add Bags</li>

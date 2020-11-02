@@ -7,27 +7,37 @@
     margin-left: 10%;
     outline: none;
     border: none;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .modal-form-input:not(:last-child){
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .modal-button {
     left: 36%;
     padding: 0.6rem 5rem;
     border-radius: 0.5rem;
-    background-color: #15938F;
+    background-color: #01615d;
     color: #fff;
     position: absolute;
     top: 85%;
+    border: none;
 }
 
 .modal-button:focus {
     outline: none;
 }
 
+.modal-button:hover {
+    background-color: #01615d;
+    color: #fbc00e;
+}
+
+.modal-button:disabled {
+    background-color: #15938F;
+    color: #fff;
+}
 .modal-form {
     width: 82%;
     margin-top: -50px;
@@ -52,4 +62,58 @@
 .my-modal-header {
     margin-top: 15px;
     margin-bottom: 20px;
+}
+
+.product-type {
+    width: 100%;
+    margin-left: 10%;
+    padding: 12px;
+    outline: none;
+    background-color: #F6F6F6;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 25px;
+
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+
+.card-message {
+    margin-left: 18% !important;
+    width: 80% !important;
+    padding: 5px 100px 1px 5px !important;
+    border-radius: 3px;
+    margin-top: -10px;
+}
+
+.success {
+    background-color: #d7ebcf !important;
+    border: 1px solid #bdd6b4 !important;
+}
+
+.fail {
+    background-color: #edc9c4 !important;
+    border: 1px solid #cb9a98 !important; 
+}
+
+.card-message-content {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
+.icon-container {
+    width: 10%;
+}
+
+.check-icon {
+    width: 100%;
+}
+
+.message{
+    margin-left: 1rem;
+    margin-top: 4px;
 }

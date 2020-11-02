@@ -5,7 +5,7 @@
  }
 
  &__group:not(last-child) {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
  }
 
  &__input {
@@ -28,7 +28,7 @@
     }
 
     p {
-        margin: 8% 34%;
+        margin: 8% 29.5%;
         font-size: 1.4rem;
         font-weight: 300;
         width: 100%;
@@ -49,7 +49,12 @@
     border-radius: 0.5rem;
     background-color: #15938F;
     color: #fff;
+    border: none;
 }
 .button:focus{
     outline: none;
+}
+
+.radio__group{
+    display: flex
 }

@@ -2,19 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Form from '../components/Form';
 import Input from '../components/common/Input';
+import MessageCard from '../components/common/MessageCard'
 
-const RightContainer = ({ handleChanges, handleSubmit }) => {
+const RightContainer = ({ handleChanges, handleSubmit, error, loading }) => {
     return (
         <div className="page-container__right">
+            {error && <div className="error-message">
+                <MessageCard message={error.graphQLErrors[0].message} />
+            </div>}
             <div className="form-header">
                 <h2>Sign in to Rice Store</h2>
-                <p>Use your registered email</p>
+                <p>Use your registered username</p>
             </div>
             <Form handleSubmit={handleSubmit} className="form">
-                <Input type="email" classes="form__input" inputName="email" placeholder="Email" inputId="email" handleChanges={handleChanges}/>
+                <Input type="text" classes="form__input" inputName="username" placeholder="Username" inputId="username" handleChanges={handleChanges}/>
                 <Input type="password" classes="form__input" inputName="password" placeholder="Password" inputId="password" handleChanges={handleChanges}/>
-                <p className="password-reset">Reset your password</p>
-                <button type="submit" className="button btn-sign">Signin</button>
+                <button type="submit" className="button btn-sign">{loading ? "Loading...": "Signin"}</button>
             </Form>
         </div>
     );

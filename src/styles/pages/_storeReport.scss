@@ -1,20 +1,20 @@
 .report-container {
     position: absolute;
-    top: 50%;
-    left: 52%;
-    transform: translate(-20%, -50%);
+    top: 24%;
+    left: 33%;
+    transform: translate(-20%, -20%);
     border-radius: 5px;
     background-color: #FFF;
     box-shadow: 0 2px 7px 0 rgba(0,0,0,0.14);
-    width: 47%;
+    width: 80%;
 
     &__sold{
         border-radius: 5px;
-        margin-top: 20px;
+        margin-top: 210px;
         padding-bottom: 20px;
         margin-bottom: 40px;
-        width: 55%;
-        margin-left: 24%;
+        width: 35%;
+        margin-left: 31%;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
     }
 
@@ -23,8 +23,8 @@
         margin-top: 20px;
         padding-bottom: 20px;
         margin-bottom: 40px;
-        width: 36%;
-        margin-left: 34%;
+        width: 26%;
+        margin-left: 36%;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
     }
 }
@@ -74,15 +74,32 @@
 .report {
     display: flex;
     justify-content: center;
+    padding: 10px 30px;
 }
 
 .bags {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     width: 50%;
+    border: 1px solid #6200ea;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 20px;
 }
 
 .money {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: 1px solid #28a745;
+    font-weight: bold;
+    padding: 20px;
+    margin-left: 10px;
+    width: 50%;
+}
+
+.backColor {
+    border: 1px solid #d39e00;
+    // background-color: #117a8b;
+    margin-left: 10px;
 }
 
 .bags-block{
@@ -100,5 +117,45 @@
 }
 
 .move-up{
-    margin-top: -10%;
+    margin-top: -5%;
+}
+
+.filters {
+    width: 60%;
+    border-radius: 5px;
+    background-color: #FFF;
+    box-shadow: 0 2px 7px 0 rgba(0,0,0,0.14);
+    position: absolute;
+    left: 20%;
+    top: 3%;
+    padding-top: 20px;
+}
+
+.sold_and_remaining {
+    width: 100%;
+}
+
+.report_cards {
+    display: flex;
+}
+
+.report-by-date {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.radio-style{
+    display: flex;
+    margin-left: 30px;
+    outline: none;
+    outline-style: none;
+    border: transparent;
+}
+
+input[type="radio"]{
+    margin-right: 10px;
+}
+
+input[type="radio"]:focus{
+    outline: none;
 }

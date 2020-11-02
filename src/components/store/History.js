@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import PropTypes from 'prop-types';
 
 import NavBar from '../NavBar';
 import SellProduct from '../store/SellProduct';
-import AddRound from '../store/AddRound';
 import AddProduct from '../store/AddProduct';
 import TransctionCard from '../../components/store/transa-card';
-import STORE_HISTORY from '../../graphql/queries/transactions';
 
-const History = ({ modal, toggle, component, closemodal, handleChanges, attributes }) => {
-    const { data } = useQuery(STORE_HISTORY);
-    const transactions = data && data.getTransactionsByRound;
-
+const History = ({
+    modal,
+    toggle,
+    component,
+    allProducts,
+    setProducts,
+    closemodal,
+    handleChanges,
+    attributes,
+    transactions,
+    setTransactions,
+}) => {
     return (
         <div>
             <NavBar
@@ -27,7 +33,10 @@ const History = ({ modal, toggle, component, closemodal, handleChanges, attribut
                     <TransctionCard
                         transaction= { transaction }
                         key={transaction.transactionId}
-                        firstName={ transaction.employee.split(' ')[1] }
+                        setTransactions={setTransactions}
+                        transactions={transactions}
+                        allProducts={allProducts}
+                        setProducts={setProducts}
                     />
                 ))}
             </div>
@@ -39,14 +48,8 @@ const History = ({ modal, toggle, component, closemodal, handleChanges, attribut
                         closemodal={closemodal}
                         handleChanges={handleChanges}
                         attributes={attributes}
-                    />
-                : (component==='addRound') ?
-                    <AddRound
-                        modal={modal}
-                        toggle={toggle}
-                        closemodal={closemodal}
-                        handleChanges={handleChanges}
-                        attributes={attributes}
+                        setTransactions={setTransactions}
+                        transactions={transactions}
                     />
                 : (component==='addProduct') ?
                     <AddProduct
@@ -55,6 +58,8 @@ const History = ({ modal, toggle, component, closemodal, handleChanges, attribut
                         closemodal={closemodal}
                         handleChanges={handleChanges}
                         attributes={attributes}
+                        setTransactions={setTransactions}
+                        transactions={transactions}
                     />: null
             }
         </div>

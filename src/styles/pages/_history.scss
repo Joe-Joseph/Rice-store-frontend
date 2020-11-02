@@ -1,13 +1,12 @@
 .side-bar {
     background-color: #01615d;
-    display: block;
     height: 100vh;
     width: 15%;
     display: inline-block;
 
     &__link-list ul{
         left: 7rem;
-        top: 90px;
+        top: 100px;
         position: absolute;
     }
 
@@ -37,12 +36,9 @@
     }
 
     &__app-title {
-        padding-top: 14px;
-        padding-left: 45px;
-        display: inline-block;
-        font-family: 'Kelly Slab', cursive;
-        color: #fff;
-        font-size: 1.2rem;
+        width: 50%;
+        margin-left: 45px;
+        margin-top: -10px;
     }
 }
 .history-content{
@@ -57,14 +53,15 @@
     margin-top: 40px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
     padding-top: 0;
-    padding-left: 45px;
-    padding-right: 55px;
-    padding-bottom: 30px;
-    width: 300px
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-bottom: 25px;
+    width: 300px;
+    margin-bottom: 5px;
 }
 
 .history-report-data td{
-    padding-top: 20px;
+    padding-top: 15px;
     font-size: 14px;
     font-family: 'Lato', sans-serif;
     font-weight: normal;
@@ -72,4 +69,22 @@
 
 .history-report-data td:not(:first-child){
     padding-left: 30px;
+}
+
+.logo{
+    width: 100%;
+}
+
+.delete-icon-container {
+    display: flex;
+    margin-top: 10px;
+    width: 8%;
+    cursor: pointer;
+}
+
+.loading-delete {
+    margin-left: 80%;
+}
+.not-loading-delete {
+    margin-left: 98%;
 }

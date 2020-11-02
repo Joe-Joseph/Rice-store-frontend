@@ -23,7 +23,7 @@ const Login = () => {
         e.preventDefault();
         signIn({
             variables: {
-                email: attributes.email,
+                username: attributes.username,
                 password: attributes.password,
             },
         });

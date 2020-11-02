@@ -24,7 +24,16 @@ module.exports = {
             {
                 test: /\.(css|less|scss|sass)$/,
                 use: ['style-loader','css-loader', 'sass-loader'],
-            }
+            },
+            {
+                test: /\.(jpg|png|svg)$/,
+                use: {
+                  loader: "url-loader",
+                  options: {
+                    limit: 25000,
+                  },
+                },
+            },
         ]
     },
     devServer: {

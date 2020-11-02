@@ -21,6 +21,7 @@ const AddRound = ({modal, toggle, closemodal, handleChanges, attributes}) => {
     }
 
     data && console.log('======ZABONETSE======', data);
+    data && closemodal()
     return (
         <ModalExample
             modal={ modal }

@@ -11,8 +11,7 @@ import STORE_HISTORY from '../../graphql/queries/transactions';
 
 const History = ({ modal, toggle, component, closemodal, handleChanges, attributes }) => {
     const { data } = useQuery(STORE_HISTORY);
-    const transactions = data && data.getTransactionsByRound;
-
+    const transactions = data && data.getAllTransactions;
     return (
         <div>
             <NavBar
@@ -27,7 +26,6 @@ const History = ({ modal, toggle, component, closemodal, handleChanges, attribut
                     <TransctionCard
                         transaction= { transaction }
                         key={transaction.transactionId}
-                        firstName={ transaction.employee.split(' ')[1] }
                     />
                 ))}
             </div>

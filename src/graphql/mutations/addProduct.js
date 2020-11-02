@@ -1,15 +1,12 @@
 import gql from 'graphql-tag';
 
 const ADD_PRODUCT = gql`
-mutation($productName: String!, $bagSize: Int!, $addedQuantity: Int!){
-    registerProduct(productName: $productName, bagSize: $bagSize, addedQuantity: $addedQuantity){
-        roundId
-        employee
+mutation($productName: String!, $bagSize: Int!, $quantity: Int!, $productType: String!){
+    registerProduct(productName: $productName, productType: $productType, bagSize: $bagSize, quantity: $quantity){
         productName
         bagSize
-        addedQuantity
+        quantity
         currentQuantity
-        totalBags
     }
 }`
 

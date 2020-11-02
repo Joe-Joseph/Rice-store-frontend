@@ -27,8 +27,6 @@ const AddProduct = ({ modal, toggle, closemodal, handleChanges, attributes }) =>
         })
     }
     data && closemodal()
-    error && setHidden(true)
-    console.log('Added here>>>>>>', data)
 
     return (
         <ModalExample
@@ -70,7 +68,7 @@ const AddProduct = ({ modal, toggle, closemodal, handleChanges, attributes }) =>
                     inputName="quantity"
                     handleChanges={handleChanges}
                 />
-                <MessageCard cardStyleClass={ hidden ? 'hidden' : 'card-message'}/>
+                { error && <MessageCard message={error.graphQLErrors[0].message} /> }
                 <button
                     type="submit"
                     className="modal-button"

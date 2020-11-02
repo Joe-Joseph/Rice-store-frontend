@@ -1,9 +1,9 @@
 import gql from 'graphql-tag';
 
 const USER_LOGIN = gql`
-mutation($email: String!, $password: String!,){
-    loginUser(email: $email, password: $password){
-        email
+mutation($username: String!, $password: String!,){
+    loginUser(username: $username, password: $password){
+        username
         firstName
         token
     }

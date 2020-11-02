@@ -20,21 +20,10 @@ const StoreReport = ({
     handleChanges,
     attributes,
 }) => {
-    // const [transactions, setTransactions] = useState()
-    // const [allProducts, setAllProductions] = useState()
-
     const { data } = useQuery(STORE_HISTORY);
     const products = useQuery(GET_ALL_PRODUCTS);
     const transactions = data && data.getAllTransactions;
     const allProducts = products && products.data && products.data.getAllProducts;
-
-    // setTransactions(allTransactions)
-    // setAllProductions(getProducts)
-
-    // useEffect(() => {
-    //     data && setTransactions(data.getAllTransactions);
-    //     products && products.data && setAllProductions(products.data.getAllProducts);
-    // })
     
 
     let totalRiceSoldBags = 0;
@@ -81,7 +70,6 @@ const StoreReport = ({
                 && transaction.transactionType === 'sold'
                 && transaction.bagSize === attributes.kg
                 && transaction.productName === attributes.productName.toLowerCase()
-                // && transaction.productType === 'rice'
             ){
                 transaction.productType === 'rice'? (
                     totalRiceSoldBags = totalRiceSoldBags + parseInt(transaction.quantity),
@@ -105,8 +93,6 @@ const StoreReport = ({
             let thisMonth = moment(Date.now()).format('L').split('/')[0]
             let thisDay = moment(Date.now()).format('L').split('/')[1]
 
-            console.log('DAY HHHH>>>>', attributes)
-
             if(transaction.transactionType === 'sold'
                 && year === thisYear
                 && month === thisMonth
@@ -127,7 +113,6 @@ const StoreReport = ({
                 && transaction.transactionType === 'sold'
                 && transaction.bagSize === attributes.kg
                 && transaction.productName === attributes.productName.toLowerCase()
-                // && transaction.productType === 'rice'
             ){
                 transaction.productType === 'rice'? (
                     totalRiceSoldBags = totalRiceSoldBags + parseInt(transaction.quantity),
@@ -167,7 +152,6 @@ const StoreReport = ({
                 && transaction.transactionType === 'sold'
                 && transaction.bagSize === attributes.kg
                 && transaction.productName === attributes.productName.toLowerCase()
-                // && transaction.productType === 'rice'
             ){
                 transaction.productType === 'rice'? (
                     totalRiceSoldBags = totalRiceSoldBags + parseInt(transaction.quantity),
@@ -207,7 +191,6 @@ const StoreReport = ({
                 && transaction.transactionType === 'sold'
                 && transaction.bagSize === attributes.kg
                 && transaction.productName === attributes.productName.toLowerCase()
-                // && transaction.productType === 'rice'
             ){
                 transaction.productType === 'rice'? (
                     totalRiceSoldBags = totalRiceSoldBags + parseInt(transaction.quantity),
@@ -243,7 +226,6 @@ const StoreReport = ({
                 && transaction.transactionType === 'sold'
                 && transaction.bagSize === attributes.kg
                 && transaction.productName === attributes.productName.toLowerCase()
-                // && transaction.productType === 'rice'
             ){
                 transaction.productType === 'rice'? (
                     totalRiceSoldBags = totalRiceSoldBags + parseInt(transaction.quantity),
@@ -279,7 +261,6 @@ const StoreReport = ({
                 && transaction.transactionType === 'sold'
                 && transaction.bagSize === attributes.kg
                 && transaction.productName === attributes.productName.toLowerCase()
-                // && transaction.productType === 'rice'
             ){
                 transaction.productType === 'rice'? (
                     totalRiceSoldBags = totalRiceSoldBags + parseInt(transaction.quantity),
@@ -301,7 +282,6 @@ const StoreReport = ({
 
         if(product.productName === attributes.productName.toLowerCase()
             && product.bagSize === attributes.kg
-            // && product.productType === 'rice'
         ){
             product.productType === 'rice' ?
             remainingRiceBagsBykg = product.quantity:
@@ -370,7 +350,7 @@ const StoreReport = ({
                                     onChange={handleChanges}
                                     className="radio-style"
                                 />
-                                <label htmlFor="month">Month</label>
+                                <label htmlFor="month">This Month</label>
                             </div>
    
                             <div className="radio__group">

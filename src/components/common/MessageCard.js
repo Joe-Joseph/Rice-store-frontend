@@ -8,9 +8,9 @@ const MessageCard = ({ message })  =>{
 
     <div className="card-message fail">
       <div className="card-message-content">
-        <div className="icon-container">
+        {/* <div className="icon-container">
           <img src={failureIcon} className="check-icon"/>
-        </div>
+        </div> */}
         <p className="message">{message}</p>
       </div>
       

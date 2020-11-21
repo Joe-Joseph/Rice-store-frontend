@@ -4,16 +4,16 @@ import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 
-const defaultApolloOptions = {
-  watchQuery: {
-    fetchPolicy: 'network-only',
-    errorPolicy: 'ignore',
-  },
-  query: {
-    fetchPolicy: 'network-only',
-    errorPolicy: 'all',
-  },
-}
+// const defaultApolloOptions = {
+//   watchQuery: {
+//     fetchPolicy: 'network-only',
+//     errorPolicy: 'ignore',
+//   },
+//   query: {
+//     fetchPolicy: 'network-only',
+//     errorPolicy: 'all',
+//   },
+// }
 
 const httpLink = createHttpLink({
   uri: 'https://rice-store.herokuapp.com/',
@@ -34,7 +34,7 @@ const authLink = setContext((_, { headers }) => {
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-  defaultOptions: defaultApolloOptions
+  // defaultOptions: defaultApolloOptions
 });
 
 export default client;

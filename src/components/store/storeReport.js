@@ -10,8 +10,7 @@ import AddProduct from './AddProduct';
 import STORE_HISTORY from '../../graphql/queries/transactions';
 import GET_ALL_PRODUCTS from '../../graphql/queries/getAllProducts';
 
-let transactions
-let allProducts
+
 const StoreReport = ({
     modal,
     toggle,
@@ -19,18 +18,24 @@ const StoreReport = ({
     closemodal,
     handleChanges,
     attributes,
+    transactions,
+    setTransactions,
+    allProducts,
+    remainingRiceBagsBykg,
+    setRemainingRiceBagsBykg
 }) => {
-    const { data } = useQuery(STORE_HISTORY);
-    const products = useQuery(GET_ALL_PRODUCTS);
-    const transactions = data && data.getAllTransactions;
-    const allProducts = products && products.data && products.data.getAllProducts;
+    // const { data } = useQuery(STORE_HISTORY);
+    // const products = useQuery(GET_ALL_PRODUCTS);
+    // console.log('YOOOOOOOO', data && data.getAllTransactions)
+    // const transactions = data && data.getAllTransactions;
+    // const allProducts = products && products.data && products.data.getAllProducts;
     
 
     let totalRiceSoldBags = 0;
     let totalRiceSoldBagsMoney = 0;
     let totalRiceBags = 0;
     let totalRiceBagsCost = 0;
-    let remainingRiceBagsBykg = 0;
+    // let remainingRiceBagsBykg = 0;
     let allRemainingBags = 0;
 
     let totalCimentSoldBags = 0;
@@ -42,9 +47,9 @@ const StoreReport = ({
 
     if(attributes.period === 'today'){
         transactions && transactions.forEach(transaction => {
-            let year = transaction.createdAt.split('/')[2]
-            let month = transaction.createdAt.split('/')[0]
-            let day = transaction.createdAt.split('/')[1]
+            let year = transaction.createdAt && transaction.createdAt.split('/')[2]
+            let month = transaction.createdAt && transaction.createdAt.split('/')[0]
+            let day = transaction.createdAt && transaction.createdAt.split('/')[1]
 
             let thisYear = moment(Date.now()).format('L').split('/')[2]
             let thisMonth = moment(Date.now()).format('L').split('/')[0]
@@ -85,9 +90,9 @@ const StoreReport = ({
 
     if(attributes.period === 'yesterday'){
         transactions && transactions.forEach(transaction => {
-            let year = transaction.createdAt.split('/')[2]
-            let month = transaction.createdAt.split('/')[0]
-            let day = transaction.createdAt.split('/')[1]
+            let year = transaction.createdAt && transaction.createdAt.split('/')[2]
+            let month = transaction.createdAt && transaction.createdAt.split('/')[0]
+            let day = transaction.createdAt && transaction.createdAt.split('/')[1]
 
             let thisYear = moment(Date.now()).format('L').split('/')[2]
             let thisMonth = moment(Date.now()).format('L').split('/')[0]
@@ -128,8 +133,8 @@ const StoreReport = ({
 
     if(attributes.period === 'month'){
         transactions && transactions.forEach(transaction => {
-            let year = transaction.createdAt.split('/')[2]
-            let month = transaction.createdAt.split('/')[0]
+            let year = transaction.createdAt && transaction.createdAt.split('/')[2]
+            let month = transaction.createdAt && transaction.createdAt.split('/')[0]
 
             let thisYear = moment(Date.now()).format('L').split('/')[2]
             let thisMonth = moment(Date.now()).format('L').split('/')[0]
@@ -167,8 +172,8 @@ const StoreReport = ({
 
     if(attributes.period === 'lastMonth'){
         transactions && transactions.forEach(transaction => {
-            let year = transaction.createdAt.split('/')[2]
-            let month = transaction.createdAt.split('/')[0]
+            let year = transaction.createdAt && transaction.createdAt.split('/')[2]
+            let month = transaction.createdAt && transaction.createdAt.split('/')[0]
 
             let thisYear = moment(Date.now()).format('L').split('/')[2]
             let thisMonth = moment(Date.now()).format('L').split('/')[0]
@@ -206,7 +211,7 @@ const StoreReport = ({
 
     if(attributes.period === 'year'){
         transactions && transactions.forEach(transaction => {
-            let year = transaction.createdAt.split('/')[2]
+            let year = transaction.createdAt && transaction.createdAt.split('/')[2]
 
             let thisYear = moment(Date.now()).format('L').split('/')[2]
 
@@ -241,7 +246,7 @@ const StoreReport = ({
 
     if(attributes.period === 'lastYear'){
         transactions && transactions.forEach(transaction => {
-            let year = transaction.createdAt.split('/')[2]
+            let year = transaction.createdAt && transaction.createdAt.split('/')[2]
 
             let thisYear = moment(Date.now()).format('L').split('/')[2]
 
@@ -273,7 +278,7 @@ const StoreReport = ({
             }
         })
     }
-
+    console.log('Products, hhhh >>', allProducts)
     allProducts && allProducts.forEach(product => {
         product.productType === 'rice' ?
         allRemainingBags = allRemainingBags + parseInt(product.quantity):
@@ -284,7 +289,7 @@ const StoreReport = ({
             && product.bagSize === attributes.kg
         ){
             product.productType === 'rice' ?
-            remainingRiceBagsBykg = product.quantity:
+            setRemainingRiceBagsBykg(product.quantity):
             product.productType === 'ciment' ?
             remainingCimentBagsBykg = product.quantity: null
         }
@@ -403,7 +408,7 @@ const StoreReport = ({
                             productName={attributes.productName}
                         />
 
-                        <ReportCards
+                        {/* <ReportCards
                             totalRiceSoldBags={totalCimentSoldBags}
                             totalRiceSoldBagsMoney={totalCimentSoldBagsMoney}
                             attributes={attributes}
@@ -412,7 +417,7 @@ const StoreReport = ({
                             remainingRiceBagsBykg={remainingCimentBagsBykg}
                             allRemainingBags={totalCimentRemainingBags}
                             title='Ciment'
-                        />
+                        /> */}
                     </div>
                     
                     {
@@ -423,14 +428,8 @@ const StoreReport = ({
                                 closemodal={closemodal}
                                 handleChanges={handleChanges}
                                 attributes={attributes}
-                            />
-                        : (component==='addRound') ?
-                            <AddRound
-                                modal={modal}
-                                toggle={toggle}
-                                closemodal={closemodal}
-                                handleChanges={handleChanges}
-                                attributes={attributes}
+                                transactions={transactions}
+                                setTransactions={setTransactions}
                             />
                         : (component==='addProduct') ?
                             <AddProduct
@@ -439,6 +438,8 @@ const StoreReport = ({
                                 closemodal={closemodal}
                                 handleChanges={handleChanges}
                                 attributes={attributes}
+                                setTransactions={setTransactions}
+                                transactions={transactions}
                             />: null
                     }
 

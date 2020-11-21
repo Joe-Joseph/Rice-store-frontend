@@ -9,7 +9,7 @@ const Login = () => {
     const [ attributes, setAttributes ] = useState({});
 
     // eslint-disable-next-line no-unused-vars
-    const [signIn, { data, error }] = useMutation(USER_LOGIN);
+    const [signIn, { data, error, loading }] = useMutation(USER_LOGIN);
 
     const history = useHistory();
     const handleChanges = (e) => {
@@ -47,6 +47,8 @@ const Login = () => {
                 <RightContainer
                     handleChanges={handleChanges}
                     handleSubmit={handleSubmit}
+                    error={error}
+                    loading={loading}
                 />
             </div>
         </div>
